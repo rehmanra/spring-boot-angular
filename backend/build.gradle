@@ -1,0 +1,50 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'org.hibernate.orm'
+}
+
+group = 'org.learndebug'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = '16'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    maven { url 'https://repo.spring.io/release' }
+    mavenCentral()
+}
+
+dependencies {
+    // Spring Dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.4'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.4'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.5.4'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
+
+    // Database Connection Dependency
+    runtimeOnly 'org.postgresql:postgresql:42.2.23.jre7'
+
+    // Swagger
+    implementation 'io.springfox:springfox-swagger2:3.0.0'
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+hibernate {
+    enhance {
+        enableLazyInitialization = true
+        enableDirtyTracking = true
+        enableAssociationManagement = true
+        enableExtendedEnhancement = false
+    }
+}

@@ -1,10 +1,10 @@
-package com.learndebug.backend.controller;
+package com.springbootangular.backend.controller;
 
-import com.learndebug.backend.converter.user.UserDTOToModelConverter;
-import com.learndebug.backend.converter.user.UserToDTOConverter;
-import com.learndebug.backend.dto.UserDTO;
-import com.learndebug.backend.model.User;
-import com.learndebug.backend.service.UserService;
+import com.springbootangular.backend.converter.user.UserDTOToModelConverter;
+import com.springbootangular.backend.converter.user.UserToDTOConverter;
+import com.springbootangular.backend.dto.UserDTO;
+import com.springbootangular.backend.model.User;
+import com.springbootangular.backend.service.UserService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpStatus;

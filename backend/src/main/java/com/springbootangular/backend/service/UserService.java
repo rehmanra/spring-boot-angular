@@ -1,6 +1,6 @@
-package com.learndebug.backend.service;
+package com.springbootangular.backend.service;
 
-import com.learndebug.backend.model.User;
+import com.springbootangular.backend.model.User;
 
 import java.util.List;
 import java.util.Optional;

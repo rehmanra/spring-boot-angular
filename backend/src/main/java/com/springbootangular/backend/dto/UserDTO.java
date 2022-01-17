@@ -1,4 +1,4 @@
-package com.learndebug.backend.dto;
+package com.springbootangular.backend.dto;
 
 import java.util.Objects;
 

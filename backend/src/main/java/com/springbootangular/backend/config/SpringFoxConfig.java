@@ -1,4 +1,4 @@
-package com.learndebug.backend.config;
+package com.springbootangular.backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

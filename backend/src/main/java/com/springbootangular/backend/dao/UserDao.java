@@ -1,6 +1,6 @@
-package com.learndebug.backend.dao;
+package com.springbootangular.backend.dao;
 
-import com.learndebug.backend.model.User;
+import com.springbootangular.backend.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

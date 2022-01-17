@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'http://localhost:8080/learn-debug/api/'
+  apiEndpoint: 'http://localhost:8080/spring-boot-angular/api/'
 };
 
 /*

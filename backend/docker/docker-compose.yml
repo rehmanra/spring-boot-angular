@@ -3,7 +3,7 @@ version: '3'
 services:
   postgres:
     image: postgres:13.1
-    container_name: learn-debug-postgres-db
+    container_name: springbootangular-postgres-db
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
       timeout: 45s
@@ -12,10 +12,10 @@ services:
     restart: always
     environment:
       - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=learn-debug-*zaDHu*tCH8y
+      - POSTGRES_PASSWORD=springbootangular-*zaDHu*tCH8y
       - APP_DB_USER=dbo_user
       - APP_DB_PASS=K95^eHcSRw8w
-      - APP_DB_NAME=learn_debug
+      - APP_DB_NAME=spring_boot_angular
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
     ports:

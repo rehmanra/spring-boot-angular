@@ -1,4 +1,4 @@
-package com.learndebug.backend.model;
+package com.springbootangular.backend.model;
 
 import javax.persistence.*;
 

@@ -1,7 +1,7 @@
-package com.learndebug.backend.service;
+package com.springbootangular.backend.service;
 
-import com.learndebug.backend.dao.UserDao;
-import com.learndebug.backend.model.User;
+import com.springbootangular.backend.dao.UserDao;
+import com.springbootangular.backend.model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

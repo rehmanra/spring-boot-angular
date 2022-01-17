@@ -5,7 +5,7 @@ plugins {
     id 'org.hibernate.orm'
 }
 
-group = 'org.learndebug'
+group = 'org.springbootangular'
 version = '1.0-SNAPSHOT'
 sourceCompatibility = '16'
 
@@ -24,11 +24,11 @@ dependencies {
     // Spring Dependencies
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.6.2'
     implementation 'org.springframework.boot:spring-boot-starter-web:2.6.2'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.5.4'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.6.2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.2'
 
     // Database Connection Dependency
-    runtimeOnly 'org.postgresql:postgresql:42.2.23.jre7'
+    runtimeOnly 'org.postgresql:postgresql:42.3.1'
 
     // Swagger
     implementation 'io.springfox:springfox-swagger2:3.0.0'

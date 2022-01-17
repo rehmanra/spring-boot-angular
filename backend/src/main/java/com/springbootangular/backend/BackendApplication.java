@@ -1,4 +1,4 @@
-package com.learndebug.backend;
+package com.springbootangular.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

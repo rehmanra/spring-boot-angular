@@ -1,4 +1,4 @@
-# learn-debug
+# spring-boot-angular
 
 Initialize Database
 

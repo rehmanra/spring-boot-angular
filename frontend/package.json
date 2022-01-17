@@ -4,9 +4,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "clean": "rimraf ./dist",
     "build": "ng build",
+    "build:prod": "ng build --prod",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "build:ci": "npm run clean && npm run test && npm run build:prod"
   },
   "private": true,
   "dependencies": {

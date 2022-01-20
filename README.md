@@ -19,4 +19,4 @@ cd ./backend<br>
 Run Frontend<br>
 ------------<br>
 cd ./frontend<br>
-npm install && npm run clean && npm run test && npm run watch && npm run start<br>
+npm install && npm run clean && npm run test && npm run watch & npm run start<br>

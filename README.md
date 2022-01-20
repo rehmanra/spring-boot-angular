@@ -2,4 +2,4 @@
 
 Initialize Database
 
-docker-compose -f stack.yml up
+docker-compose -f ./backend/docker/docker-compose.yml up

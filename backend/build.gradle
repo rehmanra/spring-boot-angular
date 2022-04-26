@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.6.5'
+    id 'org.springframework.boot' version '2.6.7'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'org.hibernate.orm'
@@ -28,7 +28,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.5'
 
     // Database Connection Dependency
-    runtimeOnly 'org.postgresql:postgresql:42.3.3'
+    runtimeOnly 'org.postgresql:postgresql:42.3.4'
 
     // Swagger
     implementation 'io.springfox:springfox-swagger2:3.0.0'

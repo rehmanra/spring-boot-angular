@@ -28,7 +28,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.7'
 
     // Database Connection Dependency
-    runtimeOnly 'org.postgresql:postgresql:42.3.4'
+    runtimeOnly 'org.postgresql:postgresql:42.3.5'
 
     // Swagger
     implementation 'io.springfox:springfox-swagger2:3.0.0'

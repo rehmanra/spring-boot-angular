@@ -7,7 +7,7 @@ pluginManagement {
     resolutionStrategy {
         eachPlugin {
             if (requested.id.id == 'org.hibernate.orm') {
-                useModule('org.hibernate:hibernate-gradle-plugin:5.6.8.Final')
+                useModule('org.hibernate:hibernate-gradle-plugin:5.6.9.Final')
             }
         }
     }

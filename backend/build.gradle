@@ -24,7 +24,7 @@ dependencies {
     // Spring Dependencies
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.5'
     implementation 'org.springframework.boot:spring-boot-starter-web:2.7.5'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.7.5'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:3.0.1'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.5'
 
     // Database Connection Dependency

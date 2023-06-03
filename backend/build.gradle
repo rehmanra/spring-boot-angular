@@ -7,7 +7,7 @@ plugins {
 
 group = 'org.springbootangular'
 version = '1.0-SNAPSHOT'
-sourceCompatibility = '16'
+sourceCompatibility = '11'
 
 configurations {
     compileOnly {

@@ -3,7 +3,7 @@
 Pre-Requisites<br>
 --------------<br>
 Docker w/ Command Line Tools<br>
-Java 16<br>
+Java 17<br>
 Node 16.x<br>
 Angular CLI via NPM<br>
 <br>

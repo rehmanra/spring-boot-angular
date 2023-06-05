@@ -1,6 +1,6 @@
 package com.springbootangular.backend.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "APPLICATION_USER")

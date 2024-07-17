@@ -4,7 +4,7 @@ Pre-Requisites<br>
 --------------<br>
 Docker w/ Command Line Tools<br>
 Java 17<br>
-Node 16.x<br>
+Node 18.19<br>
 Angular CLI via NPM<br>
 <br>
 Initialize Database<br>

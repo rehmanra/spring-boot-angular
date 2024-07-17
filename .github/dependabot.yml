@@ -9,11 +9,23 @@ updates:
     directory: "/frontend" # Location of package manifests
     schedule:
       interval: "daily"
+    groups:
+      npm-dependencies: 
+        patterns: 
+          - "*"
   - package-ecosystem: "gradle" # See documentation for possible values
     directory: "/backend" # Location of package manifests
     schedule:
       interval: "daily"
+    groups:
+      gradle-dependencies: 
+        patterns: 
+          - "*"
   - package-ecosystem: "github-actions" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+    groups:
+      actions-dependencies: 
+        patterns: 
+          - "*"

@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '3.3.4'
+    id 'org.springframework.boot' version '3.3.5'
     id 'io.spring.dependency-management' version '1.1.6'
     id 'java'
     id 'org.hibernate.orm'
@@ -22,10 +22,10 @@ repositories {
 
 dependencies {
     // Spring Dependencies
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.3.4'
-    implementation 'org.springframework.boot:spring-boot-starter-web:3.3.4'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:3.3.4'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.3.4'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.3.5'
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.3.5'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:3.3.5'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.3.5'
 
     // Database Connection Dependency
     runtimeOnly 'org.postgresql:postgresql:42.7.4'

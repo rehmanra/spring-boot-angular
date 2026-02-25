@@ -201,27 +201,52 @@ Invoke any of these with `/prompt-name` in Copilot Chat. Each prompt writes
 
 | Prompt | Phase | Description |
 |--------|-------|-------------|
-| `design-feature` | Design | ADR + API shape + component list. No code. |
+| `requirements` | Discover | User stories, acceptance criteria, DoD, stakeholder context. No code. |
+| `design-feature` | Design | ADR + API shape + data model + component inventory. No code. |
+| `ui-design` | UX | User flows, component spec, ARIA requirements, HTML structure outline. |
 | `api-contract` | Contract | OpenAPI-first contract definition before implementation. |
 | `db-migration` | Implement | Schema change, SQL migration, entity/DTO/DAO sync. |
 | `new-endpoint` | Implement | Full-stack endpoint via parallel worktrees. |
+| `ui-implement` | Implement | Angular templates, CSS, routing driven by ui-design spec. |
 | `add-tests` | Quality | Coverage expansion for a specific target. |
 | `refactor` | Quality | Behavior-preserving restructuring (green before and after). |
 | `code-review` | Quality | 4-severity review: Critical / Significant / Minor / Informational. |
+| `acceptance` | Quality | Validate implementation against original AC — close the DoD loop. |
 | `fix-issues` | Fix | Triage → worktrees → agents → cherry-pick. |
 | `security-audit` | Security | OWASP-aligned audit + severity-ranked findings. |
+| `accessibility-audit` | Compliance | WCAG 2.1 AA: keyboard nav, ARIA, contrast, screen reader. |
+| `performance-audit` | Performance | Bundle analysis, change detection, N+1 queries, missing indexes. |
+| `observability` | Operational | Structured logging, health endpoints, metrics, Angular error handler. |
 | `upgrade-deps` | Maintenance | Gradle + npm upgrade cycle, patch → minor → major. |
 | `release` | Ship | Changelog, version bump, tag, release PR to main. |
+| `sync-instructions` | Sync | Detect drift; reconcile this file after substantial decisions. |
 | `handoff` | Orchestrate | Read `.agent-handoff.md`, route to next prompt, chain agents. |
 
-### Recommended flows
+### When to run `sync-instructions`
+
+Run it after any of these events:
+- `design-feature` makes an architectural decision
+- `db-migration` or `new-endpoint` establishes a new entity or pattern
+- `upgrade-deps` changes version numbers
+- A `fix-issues` run reveals a new recurring mistake (add to Do Not list)
+- Monthly, regardless of activity
+
+### Recommended SDLC flows
 
 ```
-New feature:   design-feature → api-contract → db-migration* → new-endpoint → add-tests → code-review → release
-Bug fix:       fix-issues → code-review → release
-Security:      security-audit → fix-issues → code-review → release
-Maintenance:   upgrade-deps → security-audit → refactor → code-review → release
-               * only if schema changes required
+New feature (full):   requirements → design-feature → ui-design → api-contract
+                        → db-migration* → new-endpoint → ui-implement
+                        → add-tests → code-review → acceptance
+                        → security-audit → accessibility-audit → performance-audit
+                        → release → sync-instructions
+
+New feature (lean):   requirements → design-feature → api-contract → new-endpoint
+                        → add-tests → code-review → acceptance → release
+
+Bug fix:              fix-issues → code-review → release
+Security:             security-audit → fix-issues → code-review → release
+Maintenance:          upgrade-deps → security-audit → observability → refactor → code-review → release
+                      (* db-migration only if schema changes required)
 ```
 
 ### Agent handoff

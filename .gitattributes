@@ -1,2 +1,5 @@
 # Set the default behavior, in case people don't have core.autocrlf set.
 * text eol=lf
+
+# Windows batch files must retain CRLF line endings to work correctly on Windows.
+*.bat text eol=crlf

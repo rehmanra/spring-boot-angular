@@ -3,6 +3,7 @@ import User from '../user';
 import { UserService } from '../user.service';
 
 @Component({
+  standalone: false,
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: [ './dashboard.component.css' ]

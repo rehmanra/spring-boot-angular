@@ -221,6 +221,10 @@ Invoke any of these with `/prompt-name` in Copilot Chat. Each prompt writes
 | `release` | Ship | Changelog, version bump, tag, release PR to main. |
 | `sync-instructions` | Sync | Detect drift; reconcile this file after substantial decisions. |
 | `handoff` | Orchestrate | Read `.agent-handoff.md`, route to next prompt, chain agents. |
+| `pipeline` | Automate | One-command idea-to-ship: initializes state, runs all phases with adversarial challenges and human gates. |
+| `challenge` | Pipeline | Adversarial challenger. Adopts a specific role and challenges a sealed phase artifact. |
+| `checkpoint` | Pipeline | Human decision gate at each SDLC stage. APPROVE / REDIRECT / ABORT with full context. |
+| `resume` | Pipeline | Ingest human steering context mid-pipeline, mark stale phases, re-run affected work. |
 
 ### When to run `sync-instructions`
 
@@ -247,6 +251,9 @@ Bug fix:              fix-issues → code-review → release
 Security:             security-audit → fix-issues → code-review → release
 Maintenance:          upgrade-deps → security-audit → observability → refactor → code-review → release
                       (* db-migration only if schema changes required)
+
+One idea (autonomous): pipeline — drives entire SDLC from a plain English description;
+                        see docs/PIPELINE-GUIDE.md for a full worked example
 ```
 
 ### Agent handoff

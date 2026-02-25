@@ -31,3 +31,7 @@ backend/docker/.env
 
 # Agent handoff scratch file — written by prompt agents, not a permanent record
 .agent-handoff.md
+
+# Pipeline state and discussion — scratch files, not permanent records
+.pipeline-state.json
+.pipeline-discussion.md

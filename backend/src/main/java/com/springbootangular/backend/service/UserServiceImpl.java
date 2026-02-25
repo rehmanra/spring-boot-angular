@@ -19,16 +19,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> getAllUsers() {
         return userDao.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> getUsersContainingName(String name) {
         return userDao.findByNameContaining(name);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<User> getUserById(Integer id) {
         return userDao.findById(id);
     }

@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -12,7 +15,7 @@ jobs:
         working-directory: ./frontend
     strategy:
       matrix:
-        node-version: [18.19]
+        node-version: [22]
 
     steps:
       - uses: actions/checkout@v6
@@ -33,4 +36,5 @@ jobs:
       - name: npm ci and npm run build
         run: |
           npm ci
+          npm run lint
           npm run build:ci

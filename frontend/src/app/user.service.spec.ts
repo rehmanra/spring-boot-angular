@@ -106,12 +106,10 @@ describe('UserService', () => {
   });
 
   describe('deleteUser', () => {
-    it('should issue DELETE to the user-by-id endpoint', () => {
+    it('should issue DELETE to the correct user endpoint without double-slash', () => {
       service.deleteUser(1).subscribe();
 
-      // Note: service constructs URL as `${usersUrl}/${id}` which results in a
-      // double-slash (usersUrl already ends in '/') — test pins current behaviour
-      const req = httpMock.expectOne(`${baseUrl}/1`);
+      const req = httpMock.expectOne(`${baseUrl}1`);
       expect(req.request.method).toBe('DELETE');
       req.flush({});
     });

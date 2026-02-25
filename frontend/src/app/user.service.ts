@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable, of} from "rxjs";
 import { MessageService } from './message.service';
@@ -25,10 +25,11 @@ export class UserService {
    * @param result - optional value to return as the observable result
    */
   private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error); // log to console instead
+    return (error: unknown): Observable<T> => {
+      console.error(error);
 
-      this.log(`${operation} failed: ${error.message}`);
+      const message = error instanceof Error ? error.message : String(error);
+      this.log(`${operation} failed: ${message}`);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
@@ -39,7 +40,7 @@ export class UserService {
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.usersUrl)
       .pipe(
-        tap(_ => this.log('fetched users')),
+        tap(() => this.log('fetched users')),
         catchError(this.handleError<User[]>('getUsers', []))
       );
   }
@@ -48,7 +49,7 @@ export class UserService {
   getUser(id: number): Observable<User> {
     const url = `${this.usersUrl}${id}`;
     return this.http.get<User>(url).pipe(
-      tap(_ => this.log(`fetched user id=${id}`)),
+      tap(() => this.log(`fetched user id=${id}`)),
       catchError(this.handleError<User>(`getUser id=${id}`))
     );
   }
@@ -78,17 +79,17 @@ export class UserService {
   /** PUT: update the user on the server */
   updateUser(user: User): Observable<any> {
     return this.http.put(this.usersUrl, user, this.httpOptions).pipe(
-      tap(_ => this.log(`updated user id=${user.id}`)),
+      tap(() => this.log(`updated user id=${user.id}`)),
       catchError(this.handleError<any>('updateUser'))
     );
   }
 
   /** DELETE: delete the user from the server */
   deleteUser(id: number): Observable<User> {
-    const url = `${this.usersUrl}/${id}`;
+    const url = `${this.usersUrl}${id}`;
 
     return this.http.delete<User>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted user id=${id}`)),
+      tap(() => this.log(`deleted user id=${id}`)),
       catchError(this.handleError<User>('deleteUser'))
     );
   }

@@ -60,6 +60,6 @@ describe('UsersComponent', () => {
     component.delete(userToDelete);
 
     expect(component.users).not.toContain(userToDelete);
-    expect(userServiceSpy.deleteUser).toHaveBeenCalledWith(userToDelete.id);
+    expect(userServiceSpy.deleteUser).toHaveBeenCalledWith(userToDelete.id!);
   });
 });

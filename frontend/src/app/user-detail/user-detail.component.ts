@@ -6,6 +6,7 @@ import User from '../user';
 import { UserService } from '../user.service';
 
 @Component({
+  standalone: false,
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
   styleUrls: [ './user-detail.component.css' ]

@@ -10,6 +10,7 @@ import User from '../user';
 import { UserService } from '../user.service';
 
 @Component({
+  standalone: false,
   selector: 'app-user-search',
   templateUrl: './user-search.component.html',
   styleUrls: [ './user-search.component.css' ]

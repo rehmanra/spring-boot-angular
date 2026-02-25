@@ -194,6 +194,44 @@ git branch -D <branch-name>
 
 ---
 
+## Prompt Library (`.github/prompts/`)
+
+Invoke any of these with `/prompt-name` in Copilot Chat. Each prompt writes
+`.agent-handoff.md` on completion. Use `handoff` to chain them.
+
+| Prompt | Phase | Description |
+|--------|-------|-------------|
+| `design-feature` | Design | ADR + API shape + component list. No code. |
+| `api-contract` | Contract | OpenAPI-first contract definition before implementation. |
+| `db-migration` | Implement | Schema change, SQL migration, entity/DTO/DAO sync. |
+| `new-endpoint` | Implement | Full-stack endpoint via parallel worktrees. |
+| `add-tests` | Quality | Coverage expansion for a specific target. |
+| `refactor` | Quality | Behavior-preserving restructuring (green before and after). |
+| `code-review` | Quality | 4-severity review: Critical / Significant / Minor / Informational. |
+| `fix-issues` | Fix | Triage → worktrees → agents → cherry-pick. |
+| `security-audit` | Security | OWASP-aligned audit + severity-ranked findings. |
+| `upgrade-deps` | Maintenance | Gradle + npm upgrade cycle, patch → minor → major. |
+| `release` | Ship | Changelog, version bump, tag, release PR to main. |
+| `handoff` | Orchestrate | Read `.agent-handoff.md`, route to next prompt, chain agents. |
+
+### Recommended flows
+
+```
+New feature:   design-feature → api-contract → db-migration* → new-endpoint → add-tests → code-review → release
+Bug fix:       fix-issues → code-review → release
+Security:      security-audit → fix-issues → code-review → release
+Maintenance:   upgrade-deps → security-audit → refactor → code-review → release
+               * only if schema changes required
+```
+
+### Agent handoff
+
+`.agent-handoff.md` (gitignored) is a scratch file written by each prompt on completion.
+It records: what was done, decisions made, test results, and the recommended next prompt.
+The `handoff` prompt reads it and routes to the next agent automatically.
+
+---
+
 ## Do Not
 
 - Do not commit `.env` or `backend/docker/.env`

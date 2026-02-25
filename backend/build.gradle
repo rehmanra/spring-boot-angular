@@ -9,8 +9,9 @@ group = 'org.springbootangular'
 version = '1.0-SNAPSHOT'
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
 }
 
 configurations {
@@ -39,7 +40,7 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql:42.7.10'
 
     // OpenAPI / Swagger UI
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.4'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.0'
 }
 
 test {

@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public List<User> getUsersContainingName(String name) {
-        return userDao.findByNameContaining(name);
+        return userDao.findByNameContainingIgnoreCase(name);
     }
 
     @Override

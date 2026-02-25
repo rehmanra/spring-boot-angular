@@ -25,31 +25,31 @@ class UserDaoTest {
     }
 
     @Test
-    void findByNameContaining_exactName_returnsMatchingUser() {
-        List<User> result = userDao.findByNameContaining("Alice");
+    void findByNameContainingIgnoreCase_exactName_returnsMatchingUser() {
+        List<User> result = userDao.findByNameContainingIgnoreCase("Alice");
         assertThat(result).hasSize(1);
         assertThat(result.get(0).getName()).isEqualTo("Alice");
     }
 
     @Test
-    void findByNameContaining_partialSubstring_returnsMultipleMatches() {
+    void findByNameContainingIgnoreCase_partialSubstring_returnsMultipleMatches() {
         // "Alice" and "Charles" both contain "l"
-        List<User> result = userDao.findByNameContaining("l");
+        List<User> result = userDao.findByNameContainingIgnoreCase("l");
         assertThat(result).hasSize(2);
     }
 
     @Test
-    void findByNameContaining_noMatch_returnsEmptyList() {
-        List<User> result = userDao.findByNameContaining("Zzz");
+    void findByNameContainingIgnoreCase_noMatch_returnsEmptyList() {
+        List<User> result = userDao.findByNameContainingIgnoreCase("Zzz");
         assertThat(result).isEmpty();
     }
 
     @Test
-    void findByNameContaining_caseSensitive_doesNotMatchWrongCase() {
-        // PostgreSQL LIKE is case-sensitive; H2 MODE=PostgreSQL matches that behaviour
-        // This documents and pins the expected case-sensitivity contract
-        List<User> result = userDao.findByNameContaining("alice");
-        assertThat(result).isEmpty();
+    void findByNameContainingIgnoreCase_matchesRegardlessOfCase() {
+        // findByNameContainingIgnoreCase: "alice" should match "Alice"
+        List<User> result = userDao.findByNameContainingIgnoreCase("alice");
+        assertThat(result).hasSize(1);
+        assertThat(result.get(0).getName()).isEqualTo("Alice");
     }
 
     @Test

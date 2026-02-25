@@ -82,7 +82,16 @@ class UserControllerTest {
         verify(userService, never()).getAllUsers();
     }
 
-    // ── GET /api/user/{id} ─────────────────────────────────────────
+    @Test
+    void getAllUsers_serviceThrowsUnexpectedly_returns500WithProblemDetail() throws Exception {
+        when(userService.getAllUsers()).thenThrow(new RuntimeException("DB unreachable"));
+
+        mockMvc.perform(get("/api/user/"))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("$.detail", is("An unexpected error occurred")));
+    }
+
+    // ── GET /api/user/{id} ─────────────────────────────────────────────
 
     @Test
     void getUserById_found_returns200WithDto() throws Exception {
@@ -105,7 +114,7 @@ class UserControllerTest {
                 .andExpect(status().isNotFound());
     }
 
-    // ── POST /api/user/ ────────────────────────────────────────────
+    // ── POST /api/user/ ─────────────────────────────────────────────
 
     @Test
     void createUser_validNewUser_returns201() throws Exception {
@@ -129,13 +138,13 @@ class UserControllerTest {
     @Test
     void createUser_withExistingId_returns400() throws Exception {
         UserDTO requestDto = new UserDTO(5, "Carol");
-        User userWithId = new User(5, "Carol");
-        when(userDTOToModelConverter.convert(any())).thenReturn(userWithId);
 
         mockMvc.perform(post("/api/user/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestDto)))
                 .andExpect(status().isBadRequest());
+
+        verify(userDTOToModelConverter, never()).convert(any());
     }
 
     @Test
@@ -150,16 +159,28 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.errors").isArray());
     }
 
+    @Test
+    void createUser_malformedJson_returns400WithProblemDetail() throws Exception {
+        mockMvc.perform(post("/api/user/")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{not-valid-json"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.detail", is("Malformed request body")));
+    }
+
     // ── PUT /api/user/ ─────────────────────────────────────────────
 
     @Test
     void saveUser_existingId_returns200() throws Exception {
         UserDTO requestDto = new UserDTO(1, "Updated");
-        User existing = new User(1, "Updated");
+        User existing = new User(1, "Alice");
+        User converted = new User(1, "Updated");
         User saved = new User(1, "Updated");
         UserDTO responseDto = new UserDTO(1, "Updated");
 
-        when(userDTOToModelConverter.convert(any())).thenReturn(existing);
+        // Controller now checks existence before converting
+        when(userService.getUserById(1)).thenReturn(Optional.of(existing));
+        when(userDTOToModelConverter.convert(any())).thenReturn(converted);
         when(userService.saveUser(any())).thenReturn(saved);
         when(userToDTOConverter.convert(saved)).thenReturn(responseDto);
 
@@ -167,19 +188,35 @@ class UserControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestDto)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(1)));
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.name", is("Updated")));
     }
 
     @Test
     void saveUser_noId_returns404() throws Exception {
         UserDTO requestDto = new UserDTO(null, "Orphan");
-        User noIdUser = new User(null, "Orphan");
-        when(userDTOToModelConverter.convert(any())).thenReturn(noIdUser);
 
         mockMvc.perform(put("/api/user/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestDto)))
                 .andExpect(status().isNotFound());
+
+        verify(userService, never()).getUserById(any());
+        verify(userDTOToModelConverter, never()).convert(any());
+    }
+
+    @Test
+    void saveUser_nonExistentId_returns404() throws Exception {
+        UserDTO requestDto = new UserDTO(999, "Ghost");
+
+        when(userService.getUserById(999)).thenReturn(Optional.empty());
+
+        mockMvc.perform(put("/api/user/")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(requestDto)))
+                .andExpect(status().isNotFound());
+
+        verify(userDTOToModelConverter, never()).convert(any());
     }
 
     @Test
@@ -193,7 +230,7 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.detail", is("Validation failed")));
     }
 
-    // ── DELETE /api/user/{id} ──────────────────────────────────────
+    // ── DELETE /api/user/{id} ─────────────────────────────────────────────
 
     @Test
     void deleteUser_returns204() throws Exception {

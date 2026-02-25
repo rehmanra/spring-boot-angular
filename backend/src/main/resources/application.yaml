@@ -10,7 +10,7 @@ spring:
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost:5432/spring_boot_angular}
     username: ${DB_USERNAME:dbo_user}
-    password: ${DB_PASSWORD:K95^eHcSRw8w}
+    password: ${DB_PASSWORD}
     driverClassName: org.postgresql.Driver
   sql:
     init:

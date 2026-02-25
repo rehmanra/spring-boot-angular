@@ -12,6 +12,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
     private Integer id;
 
+    @Column(name = "NAME", nullable = false)
     private String name;
 
     public User() {

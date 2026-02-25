@@ -5,8 +5,8 @@ import com.springbootangular.backend.converter.user.UserToDTOConverter;
 import com.springbootangular.backend.dto.UserDTO;
 import com.springbootangular.backend.model.User;
 import com.springbootangular.backend.service.UserService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ import jakarta.validation.Valid;
 @Validated
 public class UserController {
 
-    private final Log log = LogFactory.getLog(UserController.class);
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
     private final UserToDTOConverter userToDTOConverter;
@@ -51,59 +51,55 @@ public class UserController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Integer id) {
-        log.debug("getUserById(" + id + ") ENTERED");
+        log.debug("getUserById({}) ENTERED", id);
         Optional<User> userById = userService.getUserById(id);
         if (userById.isPresent()) {
             UserDTO userDTO = userToDTOConverter.convert(userById.get());
-            log.debug("getUserById(" + id + ") EXITED - 200");
+            log.debug("getUserById({}) EXITED - 200", id);
             return ResponseEntity.ok(userDTO);
         } else {
-            log.debug("getUserById(" + id + ") EXITED - 404");
+            log.debug("getUserById({}) EXITED - 404", id);
             return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping(value = "/")
     public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO) {
-        log.debug("createUser(" + userDTO + ") ENTERED");
-        User user = userDTOToModelConverter.convert(userDTO);
-        if (user != null && user.getId() == null) {
-            User saveUser = userService.saveUser(user);
-            UserDTO dto = userToDTOConverter.convert(saveUser);
-            log.debug("createUser(" + userDTO + ") EXITED - 201");
-            return new ResponseEntity<>(dto, HttpStatus.CREATED);
-        } else if (user != null && user.getId() != null){
-            log.debug("createUser(" + userDTO + ") EXITED - 400");
+        log.debug("createUser({}) ENTERED", userDTO);
+        if (userDTO.id() != null) {
+            log.debug("createUser - id present on create request, returning 400");
             return ResponseEntity.badRequest().build();
-        } else {
-            log.debug("createUser(" + userDTO + ") EXITED - 500");
-            return ResponseEntity.internalServerError().build();
         }
+        User user = userDTOToModelConverter.convert(userDTO);
+        User saved = userService.saveUser(user);
+        UserDTO dto = userToDTOConverter.convert(saved);
+        log.debug("createUser({}) EXITED - 201", userDTO);
+        return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/")
     public ResponseEntity<UserDTO> saveUser(@Valid @RequestBody UserDTO userDTO) {
-        log.debug("saveUser(" + userDTO + ") ENTERED");
-        User user = userDTOToModelConverter.convert(userDTO);
-        if (user != null && user.getId() == null) {
-            log.debug("saveUser(" + userDTO + ") EXITED - 404");
+        log.debug("saveUser({}) ENTERED", userDTO);
+        if (userDTO.id() == null) {
+            log.debug("saveUser - no id, returning 404");
             return ResponseEntity.notFound().build();
-        } else if (user != null && user.getId() != null){
-            User saveUser = userService.saveUser(user);
-            UserDTO dto = userToDTOConverter.convert(saveUser);
-            log.debug("saveUser(" + userDTO + ") EXITED - 200");
-            return ResponseEntity.ok(dto);
-        } else {
-            log.debug("saveUser(" + userDTO + ") EXITED - 500");
-            return ResponseEntity.internalServerError().build();
         }
+        if (userService.getUserById(userDTO.id()).isEmpty()) {
+            log.debug("saveUser - id {} not found, returning 404", userDTO.id());
+            return ResponseEntity.notFound().build();
+        }
+        User user = userDTOToModelConverter.convert(userDTO);
+        User saved = userService.saveUser(user);
+        UserDTO dto = userToDTOConverter.convert(saved);
+        log.debug("saveUser({}) EXITED - 200", userDTO);
+        return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable Integer id) {
-        log.debug("deleteUser(" + id + ") ENTERED");
+        log.debug("deleteUser({}) ENTERED", id);
         userService.deleteUserById(id);
-        log.debug("deleteUser(" + id + ") EXITED");
+        log.debug("deleteUser({}) EXITED", id);
     }
 }

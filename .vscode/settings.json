@@ -1,0 +1,40 @@
+{
+  // ── Copilot ────────────────────────────────────────────────────────────────
+  // .github/copilot-instructions.md is auto-injected into every request.
+  // Prompt files live in .github/prompts/ and are invokable via /prompt-name.
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+
+  // Permit Copilot agents to invoke VS Code tasks
+  "github.copilot.chat.agent.runTasks": true,
+
+  // ── Editor defaults ────────────────────────────────────────────────────────
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+
+  // ── Java ──────────────────────────────────────────────────────────────────
+  "java.jdt.ls.java.home": "${env:HOME}/.sdkman/candidates/java/current",
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "spring-boot.ls.java.home": "${env:HOME}/.sdkman/candidates/java/current",
+
+  // ── TypeScript ────────────────────────────────────────────────────────────
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.suggest.autoImports": true,
+
+  // ── Files ─────────────────────────────────────────────────────────────────
+  "files.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/build": true,
+    "**/dist": true,
+    "**/.angular": true
+  },
+
+  // ── Testing ───────────────────────────────────────────────────────────────
+  "java.test.config": {
+    "workingDirectory": "${workspaceFolder}/backend",
+    "vmArgs": ["-DJAVA_HOME=${env:HOME}/.sdkman/candidates/java/current"]
+  }
+}

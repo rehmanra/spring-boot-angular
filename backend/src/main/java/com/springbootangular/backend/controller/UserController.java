@@ -59,7 +59,7 @@ public class UserController {
         }
     }
 
-    @PutMapping(value = "/")
+    @PostMapping(value = "/")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
         log.debug("createUser(" + userDTO + ") ENTERED");
         User user = userDTOToModelConverter.convert(userDTO);
@@ -77,7 +77,7 @@ public class UserController {
         }
     }
 
-    @PostMapping(value = "/")
+    @PutMapping(value = "/")
     public ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO userDTO) {
         log.debug("saveUser(" + userDTO + ") ENTERED");
         User user = userDTOToModelConverter.convert(userDTO);

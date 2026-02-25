@@ -67,19 +67,19 @@ export class UserService {
     );
   }
 
-  /** POST: update the user on the server */
-  updateUser(user: User): Observable<any> {
-    return this.http.post(this.usersUrl, user, this.httpOptions).pipe(
-      tap(_ => this.log(`updated user id=${user.id}`)),
-      catchError(this.handleError<any>('updateUser'))
+  /** POST: add a new user to the server */
+  addUser(user: User): Observable<User> {
+    return this.http.post<User>(this.usersUrl, user, this.httpOptions).pipe(
+      tap((newUser: User) => this.log(`added user w/ id=${newUser.id}`)),
+      catchError(this.handleError<User>('addUser'))
     );
   }
 
-  /** PUT: add a new user to the server */
-  addUser(user: User): Observable<User> {
-    return this.http.put<User>(this.usersUrl, user, this.httpOptions).pipe(
-      tap((newUser: User) => this.log(`added user w/ id=${newUser.id}`)),
-      catchError(this.handleError<User>('addUser'))
+  /** PUT: update the user on the server */
+  updateUser(user: User): Observable<any> {
+    return this.http.put(this.usersUrl, user, this.httpOptions).pipe(
+      tap(_ => this.log(`updated user id=${user.id}`)),
+      catchError(this.handleError<any>('updateUser'))
     );
   }
 

@@ -1,9 +1,6 @@
 spring:
   profiles:
     active: development
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
   jpa:
     database: POSTGRESQL
     show-sql: false

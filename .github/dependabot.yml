@@ -8,7 +8,7 @@ updates:
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/frontend" # Location of package manifests
     schedule:
-      interval: "daily"
+      interval: "weekly"
     groups:
       npm-dependencies: 
         patterns: 
@@ -16,7 +16,7 @@ updates:
   - package-ecosystem: "gradle" # See documentation for possible values
     directory: "/backend" # Location of package manifests
     schedule:
-      interval: "daily"
+      interval: "weekly"
     groups:
       gradle-dependencies: 
         patterns: 
@@ -24,7 +24,7 @@ updates:
   - package-ecosystem: "github-actions" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "daily"
+      interval: "weekly"
     groups:
       actions-dependencies: 
         patterns: 

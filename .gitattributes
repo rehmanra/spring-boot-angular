@@ -1,2 +1,18 @@
 # Set the default behavior, in case people don't have core.autocrlf set.
 * text eol=lf
+
+# Windows batch files must retain CRLF line endings to work correctly on Windows.
+*.bat text eol=crlf
+
+# Binary files - prevent line ending conversion which would corrupt them.
+*.ico binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary

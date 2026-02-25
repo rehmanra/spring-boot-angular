@@ -5,7 +5,13 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "APPLICATION_USER")
 public class User {
+
+    @Id
+    @Column(name = "ID")
+    @SequenceGenerator(name = "id_seq", sequenceName = "application_user_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
     private Integer id;
+
     private String name;
 
     public User() {
@@ -16,10 +22,6 @@ public class User {
         this.name = name;
     }
 
-    @Id
-    @Column(name = "ID")
-    @SequenceGenerator(name = "id_seq", sequenceName = "application_user_id_seq",allocationSize=1)
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="id_seq")
     public Integer getId() {
         return id;
     }
@@ -36,3 +38,4 @@ public class User {
         this.name = name;
     }
 }
+

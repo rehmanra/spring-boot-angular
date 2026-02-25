@@ -9,11 +9,6 @@ import org.springframework.stereotype.Component;
 public class UserToDTOConverter implements BaseConverter<User, UserDTO> {
     @Override
     public UserDTO convert(User source) {
-        UserDTO target = new UserDTO();
-
-        target.setId(source.getId());
-        target.setName(source.getName());
-
-        return target;
+        return new UserDTO(source.getId(), source.getName());
     }
 }

@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.validation.annotation.Validated;
+import jakarta.validation.Valid;
+
 @RequestMapping("api/user")
 @RestController
+@Validated
 public class UserController {
 
     private final Log log = LogFactory.getLog(UserController.class);
@@ -60,7 +64,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO) {
         log.debug("createUser(" + userDTO + ") ENTERED");
         User user = userDTOToModelConverter.convert(userDTO);
         if (user != null && user.getId() == null) {
@@ -78,7 +82,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/")
-    public ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> saveUser(@Valid @RequestBody UserDTO userDTO) {
         log.debug("saveUser(" + userDTO + ") ENTERED");
         User user = userDTOToModelConverter.convert(userDTO);
         if (user != null && user.getId() == null) {

@@ -19,14 +19,14 @@ public class UserDTOToModelConverter implements BaseConverter<UserDTO, User> {
     @Override
     public User convert(UserDTO source) {
         User target;
-        Integer id = source.getId();
+        Integer id = source.id();
         if(id != null) {
             Optional<User> userById = userService.getUserById(id);
             target = userById.orElseGet(User::new);
         } else {
             target = new User();
         }
-        target.setName(source.getName());
+        target.setName(source.name());
 
         return target;
     }

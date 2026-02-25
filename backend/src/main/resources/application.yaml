@@ -11,9 +11,9 @@ spring:
       ddl-auto: none
     open-in-view: false
   datasource:
-    url: jdbc:postgresql://localhost:5432/spring_boot_angular
-    username: dbo_user
-    password: K95^eHcSRw8w
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/spring_boot_angular}
+    username: ${DB_USERNAME:dbo_user}
+    password: ${DB_PASSWORD:K95^eHcSRw8w}
     driverClassName: org.postgresql.Driver
   sql:
     init:
@@ -22,3 +22,5 @@ server:
   port: 8080
   servlet:
     context-path: /spring-boot-angular
+cors:
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:4200}

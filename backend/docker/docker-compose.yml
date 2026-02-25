@@ -10,12 +10,8 @@ services:
       interval: 10s
       retries: 10
     restart: always
-    environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=springbootangular-*zaDHu*tCH8y
-      - APP_DB_USER=dbo_user
-      - APP_DB_PASS=K95^eHcSRw8w
-      - APP_DB_NAME=spring_boot_angular
+    env_file:
+      - .env
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
     ports:

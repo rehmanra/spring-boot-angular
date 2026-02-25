@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config src/proxy.conf.json",
     "clean": "rimraf ./dist",
     "build": "ng build",
-    "build:prod": "ng build",
+    "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --watch=false --browsers=ChromeHeadlessCustom",
     "test:watch": "ng test",
@@ -30,10 +30,18 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~19.2.1",
+    "@angular-eslint/builder": "^19.8.1",
+    "@angular-eslint/eslint-plugin": "^19.8.1",
+    "@angular-eslint/eslint-plugin-template": "^19.8.1",
+    "@angular-eslint/schematics": "^19.8.1",
     "@angular/cli": "~19.2.1",
     "@angular/compiler-cli": "~19.2.1",
+    "@eslint/js": "^9.39.3",
     "@types/jasmine": "~5.1.7",
     "@types/node": "^22.13.10",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
+    "eslint": "^9.39.3",
     "jasmine-core": "~5.6.0",
     "karma": "~6.4.4",
     "karma-chrome-launcher": "~3.2.0",
@@ -42,6 +50,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "puppeteer": "^24.4.0",
     "rimraf": "^6.0.1",
-    "typescript": "~5.8.2"
+    "typescript": "~5.8.2",
+    "typescript-eslint": "^8.56.1"
   }
 }

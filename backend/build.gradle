@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '4.0.3'
+    id 'org.springframework.boot' version '4.0.6'
     id 'io.spring.dependency-management' version '1.1.7'
     id 'java'
     id 'jacoco'
@@ -37,10 +37,10 @@ dependencies {
     testRuntimeOnly 'com.h2database:h2'
 
     // Database Connection Dependency
-    runtimeOnly 'org.postgresql:postgresql:42.7.10'
+    runtimeOnly 'org.postgresql:postgresql:42.7.11'
 
     // OpenAPI / Swagger UI
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.2'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.3'
 }
 
 test {
